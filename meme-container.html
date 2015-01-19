@@ -1,0 +1,91 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<polymer-element name="meme-container" attributes="yatta" >
+  <template>
+    <style>
+      :host {
+        display: block;
+        margin: .6em;
+        padding: .7em;
+        background-color: #f0f0f0;
+        box-shadow: 0 .4em .5em 0 rgba(0, 0, 0, 0.24);
+      }
+      .image {
+        width: 100%;
+        position: relative;
+        text-align: center;
+      }
+      .element {
+        position: absolute;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        color: white;
+        font-family: Impact, Charcoal, sans-serif;
+        /* make a text stroke .. */
+        text-shadow: 0 0 0.15em #000;
+      }
+      h1 {
+        font-size: 1em;
+      }
+      h2 {
+        top: 0;
+      }
+      h3 {
+        bottom: 0;
+      }
+      .image img {
+        width: 100%;
+        height: auto;
+      }
+    </style>
+    <h1 id="title" contentEditable spellCheck=false>Headliine</h1>
+    <div class="image">
+      <h2 id="top" contentEditable spellCheck=false class="element" >This is</h2>
+      <h3 id="bottom" contentEditable spellCheck=false class="element">Just right</h3>
+      <img src="{{img}}" />
+    </div>
+  </template>
+  <script>
+  Polymer("meme-container",{
+    ready: function(){
+      if(this.yatta != null){
+        var that = this;
+        var bind = function(){
+          var e = that.yatta.val();
+          that.img = e.img;
+          if(e.title != null){
+            e.title.bind(that.$.title, that.shadowRoot)
+          }
+          if(e.top != null){
+            e.top.bind(that.$.top, that.shadowRoot)
+          }
+          if(e.bottom != null){
+            e.bottom.bind(that.$.bottom, that.shadowRoot)
+          }
+        }
+        bind();
+        this.yatta.observe(bind);
+      }
+    },
+    yattaChanged: function(){
+      var that = this;
+      var bind = function(){
+        var e = that.yatta.val();
+        that.img = e.img;
+        if(e.title != null){
+          e.title.bind(that.$.title,that.shadowRoot)
+        }
+        if(e.top != null){
+          e.top.bind(that.$.top, that.shadowRoot)
+        }
+        if(e.bottom != null){
+          e.bottom.bind(that.$.bottom, that.shadowRoot)
+        }
+      }
+      bind();
+      this.yatta.observe(bind);
+    }
+  })
+  </script>
+</polymer-element>
