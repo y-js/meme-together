@@ -10,6 +10,14 @@ connector = new XMPPConnector "meme-together2",
 connector.debug = true
 
 yatta = new Yatta connector
+feed = yatta.val("feed",[],"mutable").val("feed")
+
+feed_size = 2
+
+feed.observe ()->
+  l = feed.val().length
+  if l > feed_size
+    feed.delete(feed_size,l-feed_size)
 
 console.log("listening!")
 
