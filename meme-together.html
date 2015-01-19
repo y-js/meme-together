@@ -3918,7 +3918,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
     <div>
         <div class="create-new" on-tap="{{createMemeHandler}}">
-          ...
+          <h2 style="margin: 0">Meme Together!</h2>
           <paper-fab icon="add" mini=""></paper-fab>
         </div>
         <paper-dialog id="meme_list" heading="Choose your Meme" transition="core-transition-top">
@@ -3964,13 +3964,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
         that.feed.observe(function(events){
           for(var i in events){
-            var new_meme = document.createElement("meme-container");
-            new_meme.yatta = events[i].value;
-            var b = that.$.meme_containers.children[events[i].position];
-            if(b != null){
-              that.$.meme_containers.insertBefore(new_meme,b)
+            if(events[i].type === "insert"){
+              var new_meme = document.createElement("meme-container");
+              new_meme.yatta = events[i].value;
+              var b = that.$.meme_containers.children[events[i].position];
+              if(b != null){
+                that.$.meme_containers.insertBefore(new_meme,b)
+              } else {
+                that.$.meme_containers.appendChild(new_meme)
+              }
             } else {
-              that.$.meme_containers.appendChild(new_meme)
+              that.$.meme_containers.removeChild(that.$.meme_containers.children[events[i].position]);
             }
           }
         });
