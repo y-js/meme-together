@@ -1203,7 +1203,7 @@ object like this: `{v: 'top', h: 'right'}`.
         top: 0;
       }
       h3 {
-        bottom: 0;
+        bottom: 4px;
       }
       .image img {
         width: 100%;
@@ -1265,9 +1265,8 @@ object like this: `{v: 'top', h: 'right'}`.
       this.yatta.observe(bind);
     },
     deleteHandler: function(){
-      var num = 0;
       var cs = this.parentElement.children
-      for(var i in cs){
+      for(var i = 0; i< cs.length; i++){
         if(cs[i] === this){
           num = i;
           break;

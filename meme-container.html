@@ -95,9 +95,8 @@
       this.yatta.observe(bind);
     },
     deleteHandler: function(){
-      var num = 0;
       var cs = this.parentElement.children
-      for(var i in cs){
+      for(var i = 0; i< cs.length; i++){
         if(cs[i] === this){
           num = i;
           break;
