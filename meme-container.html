@@ -16,7 +16,11 @@
         position: relative;
         text-align: center;
       }
-      .element {
+      #title {
+        font-size: 1em;
+      }
+      #top {
+        top: 0;
         position: absolute;
         padding: 0;
         margin: 0;
@@ -26,14 +30,16 @@
         /* make a text stroke .. */
         text-shadow: 0 0 0.15em #000;
       }
-      #title {
-        font-size: 1em;
-      }
-      #top {
-        top: 0;
-      }
       #bottom {
         bottom: 5px;
+        position: absolute;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        color: white;
+        font-family: Impact, Charcoal, sans-serif;
+        /* make a text stroke .. */
+        text-shadow: 0 0 0.15em #000;
       }
       .image img {
         width: 100%;
@@ -47,10 +53,10 @@
       }
     </style>
     <paper-fab class="delete_btn" icon="delete" mini on-tap="{{deleteHandler}}"></paper-fab>
-    <h1 id="title" contentEditable spellCheck=false>Headliine</h1>
+    <h1 id="title" contentEditable spellCheck=false></h1>
     <div class="image">
-      <h2 id="top" contentEditable spellCheck=false class="element" >This is</h2>
-      <h3 id="bottom" contentEditable spellCheck=false class="element">Just right</h3>
+      <h2 id="top" contentEditable spellCheck=false ></h2>
+      <h3 id="bottom" contentEditable spellCheck=false></h3>
       <img src="{{img}}" />
     </div>
   </template>
