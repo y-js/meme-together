@@ -5,6 +5,7 @@
     <style>
       :host {
         display: block;
+        position: relative;
         margin: .6em;
         padding: .7em;
         background-color: #f0f0f0;
@@ -32,13 +33,20 @@
         top: 0;
       }
       h3 {
-        bottom: 0;
+        bottom: 4px;
       }
       .image img {
         width: 100%;
         height: auto;
       }
+      .delete_btn {
+        background-color: gray;
+        position: absolute;
+        right: -20px;
+        top: -20px;
+      }
     </style>
+    <paper-fab class="delete_btn" icon="delete" mini on-tap="{{deleteHandler}}"></paper-fab>
     <h1 id="title" contentEditable spellCheck=false>Headliine</h1>
     <div class="image">
       <h2 id="top" contentEditable spellCheck=false class="element" >This is</h2>
@@ -85,6 +93,20 @@
       }
       bind();
       this.yatta.observe(bind);
+    },
+    deleteHandler: function(){
+      var num = 0;
+      var cs = this.parentElement.children
+      for(var i in cs){
+        if(cs[i] === this){
+          num = i;
+          break;
+        }
+      }
+      this.feed.delete(i,1)
+    },
+    downloadHandler: function(){
+      
     }
   })
   </script>

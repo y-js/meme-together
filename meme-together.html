@@ -1175,6 +1175,7 @@ object like this: `{v: 'top', h: 'right'}`.
     <style>
       :host {
         display: block;
+        position: relative;
         margin: .6em;
         padding: .7em;
         background-color: #f0f0f0;
@@ -1208,7 +1209,14 @@ object like this: `{v: 'top', h: 'right'}`.
         width: 100%;
         height: auto;
       }
+      .delete_btn {
+        background-color: gray;
+        position: absolute;
+        right: -20px;
+        top: -20px;
+      }
     </style>
+    <paper-fab class="delete_btn" icon="delete" mini="" on-tap="{{deleteHandler}}"></paper-fab>
     <h1 id="title" contenteditable="" spellcheck="false">Headliine</h1>
     <div class="image">
       <h2 id="top" contenteditable="" spellcheck="false" class="element">This is</h2>
@@ -1255,6 +1263,20 @@ object like this: `{v: 'top', h: 'right'}`.
       }
       bind();
       this.yatta.observe(bind);
+    },
+    deleteHandler: function(){
+      var num = 0;
+      var cs = this.parentElement.children
+      for(var i in cs){
+        if(cs[i] === this){
+          num = i;
+          break;
+        }
+      }
+      this.feed.delete(i,1)
+    },
+    downloadHandler: function(){
+      
     }
   })
   </script>
@@ -3938,7 +3960,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </template>
           </div>
         </paper-dialog>
-        <xmpp-connector connector="{{connector}}" room="meme-together2"></xmpp-connector>
+        <xmpp-connector debug="true" connector="{{connector}}" room="meme-together"></xmpp-connector>
         <yatta-element val="{{yatta}}" connector="{{connector}}">
         </yatta-element>
         <div id="meme_containers">
@@ -3950,35 +3972,38 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     ready: function(){
       window.meme_together = this;
       var that = this;
-      this.connector.whenSynced(function(){
+      var bind = (function(){
         var y = that.yatta;
-        if(y.val("feed") == null) {
-          y.val("feed",[],"mutable");
-        }
-        that.feed = y.val("feed");
-        var feed_list = that.feed.val();
-        for(var i in feed_list){
-          var m = document.createElement("meme-container");
-          m.yatta = feed_list[i];
-          that.$.meme_containers.appendChild(m);
-        }
-        that.feed.observe(function(events){
-          for(var i in events){
-            if(events[i].type === "insert"){
-              var new_meme = document.createElement("meme-container");
-              new_meme.yatta = events[i].value;
-              var b = that.$.meme_containers.children[events[i].position];
-              if(b != null){
-                that.$.meme_containers.insertBefore(new_meme,b)
-              } else {
-                that.$.meme_containers.appendChild(new_meme)
-              }
-            } else {
-              that.$.meme_containers.removeChild(that.$.meme_containers.children[events[i].position]);
-            }
+        if(y.val("feed") != null) {
+          that.feed = y.val("feed");
+          var feed_list = that.feed.val();
+          for(var i in feed_list){
+            var m = document.createElement("meme-container");
+            m.yatta = feed_list[i];
+            that.$.meme_containers.appendChild(m);
           }
-        });
+          that.feed.observe(function(events){
+            for(var i in events){
+              if(events[i].type === "insert"){
+                var new_meme = document.createElement("meme-container");
+                new_meme.yatta = events[i].value;
+                new_meme.feed = events[i].object
+                var b = that.$.meme_containers.children[events[i].position];
+                if(b != null){
+                  that.$.meme_containers.insertBefore(new_meme,b)
+                } else {
+                  that.$.meme_containers.appendChild(new_meme)
+                }
+              } else {
+                var c = that.$.meme_containers.children[events[i].position];
+                that.$.meme_containers.removeChild(c);
+              }
+            }
+          });
+        that.yatta.unobserve(bind)
+        }
       });
+      that.yatta.observe(bind);
     },
     addMeme: function(event, n, img){
       this.$.meme_list.toggle();
