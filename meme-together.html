@@ -3941,18 +3941,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
         <paper-dialog id="meme_list" heading="Choose your Meme" transition="core-transition-top">
           <style>
-            .galleryImage {
+            #galleryImages img {
               height: 70px;
               transition: all 200ms ease-in;
             }
-            .galleryImage:hover {
+            #galleryImages img:hover {
               transform: scale(1.2);
               transform-origin: 0 0;
             }
           </style>
-          <div horizontal="" layout="" wrap="">
+          <div id="galleryImages" horizontal="" layout="" wrap="">
             <template repeat="{{meme in memes.data.memes}}">
-              <img class="galleryImage" src="{{meme.url}}" on-click="{{addMeme}}">
+              <img src="{{meme.url}}" on-click="{{addMeme}}" style="height:70px;">
             </template>
           </div>
         </paper-dialog>
