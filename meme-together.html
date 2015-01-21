@@ -1181,7 +1181,7 @@ object like this: `{v: 'top', h: 'right'}`.
         background-color: #f0f0f0;
         box-shadow: 0 .4em .5em 0 rgba(0, 0, 0, 0.24);
       }
-      .image {
+      #image {
         width: 100%;
         position: relative;
         text-align: center;
@@ -1199,6 +1199,8 @@ object like this: `{v: 'top', h: 'right'}`.
         font-family: Impact, Charcoal, sans-serif;
         /* make a text stroke .. */
         text-shadow: 0 0 0.15em #000;
+        font-size: 1.5em;
+        line-height: 1;
       }
       #bottom {
         bottom: 5px;
@@ -1210,10 +1212,14 @@ object like this: `{v: 'top', h: 'right'}`.
         font-family: Impact, Charcoal, sans-serif;
         /* make a text stroke .. */
         text-shadow: 0 0 0.15em #000;
+        font-size: 1.17em;
+        line-height: 1;
       }
-      .image img {
+      #image img {
         width: 100%;
         height: auto;
+        padding: 0;
+        margin: 0;
       }
       .delete_btn {
         background-color: gray;
@@ -1224,7 +1230,7 @@ object like this: `{v: 'top', h: 'right'}`.
     </style>
     <paper-fab class="delete_btn" icon="delete" mini="" on-tap="{{deleteHandler}}"></paper-fab>
     <h1 id="title" contenteditable="" spellcheck="false"></h1>
-    <div class="image">
+    <div id="image">
       <h2 id="top" contenteditable="" spellcheck="false"></h2>
       <h3 id="bottom" contenteditable="" spellcheck="false"></h3>
       <img src="{{img}}">

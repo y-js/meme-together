@@ -11,7 +11,7 @@
         background-color: #f0f0f0;
         box-shadow: 0 .4em .5em 0 rgba(0, 0, 0, 0.24);
       }
-      .image {
+      #image {
         width: 100%;
         position: relative;
         text-align: center;
@@ -29,6 +29,8 @@
         font-family: Impact, Charcoal, sans-serif;
         /* make a text stroke .. */
         text-shadow: 0 0 0.15em #000;
+        font-size: 1.5em;
+        line-height: 1;
       }
       #bottom {
         bottom: 5px;
@@ -40,10 +42,14 @@
         font-family: Impact, Charcoal, sans-serif;
         /* make a text stroke .. */
         text-shadow: 0 0 0.15em #000;
+        font-size: 1.17em;
+        line-height: 1;
       }
-      .image img {
+      #image img {
         width: 100%;
         height: auto;
+        padding: 0;
+        margin: 0;
       }
       .delete_btn {
         background-color: gray;
@@ -54,7 +60,7 @@
     </style>
     <paper-fab class="delete_btn" icon="delete" mini on-tap="{{deleteHandler}}"></paper-fab>
     <h1 id="title" contentEditable spellCheck=false></h1>
-    <div class="image">
+    <div id="image">
       <h2 id="top" contentEditable spellCheck=false ></h2>
       <h3 id="bottom" contentEditable spellCheck=false></h3>
       <img src="{{img}}" />
