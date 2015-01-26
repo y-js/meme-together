@@ -5,8 +5,8 @@
 <link rel="import" href="../core-icons/core-icons.html">
 <link rel="import" href="../paper-dialog/paper-dialog.html">
 <link rel="import" href="../core-ajax/core-ajax.html">
-<link rel="import" href="../Yatta/yatta-element.html">
-<link rel="import" href="../Yatta-Connectors/xmpp-connector/xmpp-connector.html">
+<link rel="import" href="../yjs/y-object.html">
+<link rel="import" href="../y-connectors/y-xmpp/y-xmpp.html">
 
 <polymer-element name="meme-together">
   <template>
@@ -66,9 +66,9 @@
             </template>
           </div>
         </paper-dialog>
-        <xmpp-connector debug=true connector="{{connector}}" room="meme-together-xx"></xmpp-connector>
-        <yatta-element val={{yatta}} connector={{connector}}>
-        </yatta-element>
+        <y-xmpp debug=true connector="{{connector}}" room="meme-together-xxx"></y-xmpp>
+        <y-object val={{y}} connector={{connector}}>
+        </y-object>
         <div id="meme_containers">
         </div>
     </div>
@@ -79,20 +79,20 @@
       window.meme_together = this;
       var that = this;
       var bind = (function(){
-        var y = that.yatta;
+        var y = that.y;
         if(y.val("feed") != null) {
           that.feed = y.val("feed");
           var feed_list = that.feed.val();
           for(var i in feed_list){
             var m = document.createElement("meme-container");
-            m.yatta = feed_list[i];
+            m.y = feed_list[i];
             that.$.meme_containers.appendChild(m);
           }
           that.feed.observe(function(events){
             for(var i in events){
               if(events[i].type === "insert"){
                 var new_meme = document.createElement("meme-container");
-                new_meme.yatta = events[i].value;
+                new_meme.y = events[i].value;
                 new_meme.feed = events[i].object
                 var b = that.$.meme_containers.children[events[i].position];
                 if(b != null){
@@ -106,10 +106,10 @@
               }
             }
           });
-        that.yatta.unobserve(bind)
+        that.y.unobserve(bind)
         }
       });
-      that.yatta.observe(bind);
+      that.y.observe(bind);
     },
     addMeme: function(event, n, img){
       this.$.meme_list.toggle();

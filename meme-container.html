@@ -1,6 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 
-<polymer-element name="meme-container" attributes="yatta" >
+<polymer-element name="meme-container" attributes="y" >
   <template>
     <style>
       :host {
@@ -69,10 +69,10 @@
   <script>
   Polymer("meme-container",{
     ready: function(){
-      if(this.yatta != null){
+      if(this.y != null){
         var that = this;
         var bind = function(){
-          var e = that.yatta.val();
+          var e = that.y.val();
           that.img = e.img;
           if(e.title != null){
             e.title.bind(that.$.title, that.shadowRoot)
@@ -85,13 +85,13 @@
           }
         }
         bind();
-        this.yatta.observe(bind);
+        this.y.observe(bind);
       }
     },
-    yattaChanged: function(){
+    yChanged: function(){
       var that = this;
       var bind = function(){
-        var e = that.yatta.val();
+        var e = that.y.val();
         that.img = e.img;
         if(e.title != null){
           e.title.bind(that.$.title,that.shadowRoot)
@@ -104,7 +104,7 @@
         }
       }
       bind();
-      this.yatta.observe(bind);
+      this.y.observe(bind);
     },
     deleteHandler: function(){
       var cs = this.parentElement.children
