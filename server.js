@@ -2,7 +2,7 @@
 var Y = require('yjs');
 Y.XMPP = require('y-connectors').XMPP;
 
-var connector = new Y.XMPP("meme-together-qq", {
+var connector = new Y.XMPP("meme-together-yjs", {
   host: "yatta.ninja",
   user: "dmonad@users.yatta.ninja",
   password: process.argv[2],

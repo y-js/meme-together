@@ -761,8 +761,6 @@ object like this: `{v: 'top', h: 'right'}`.
 
 
 
-
-
 </head><body><div hidden="">
 <polymer-element name="paper-ripple" attributes="initialOpacity opacityDecayVelocity" assetpath="../paper-ripple/">
 <template>
@@ -1171,7 +1169,7 @@ object like this: `{v: 'top', h: 'right'}`.
 </script>
 </polymer-element>
 
-<polymer-element name="meme-container" attributes="yatta" assetpath="">
+<polymer-element name="meme-container" attributes="y" assetpath="">
   <template>
     <style>
       :host {
@@ -1240,10 +1238,10 @@ object like this: `{v: 'top', h: 'right'}`.
   <script>
   Polymer("meme-container",{
     ready: function(){
-      if(this.yatta != null){
+      if(this.y != null){
         var that = this;
         var bind = function(){
-          var e = that.yatta.val();
+          var e = that.y.val();
           that.img = e.img;
           if(e.title != null){
             e.title.bind(that.$.title, that.shadowRoot)
@@ -1256,13 +1254,13 @@ object like this: `{v: 'top', h: 'right'}`.
           }
         }
         bind();
-        this.yatta.observe(bind);
+        this.y.observe(bind);
       }
     },
-    yattaChanged: function(){
+    yChanged: function(){
       var that = this;
       var bind = function(){
-        var e = that.yatta.val();
+        var e = that.y.val();
         that.img = e.img;
         if(e.title != null){
           e.title.bind(that.$.title,that.shadowRoot)
@@ -1275,7 +1273,7 @@ object like this: `{v: 'top', h: 'right'}`.
         }
       }
       bind();
-      this.yatta.observe(bind);
+      this.y.observe(bind);
     },
     deleteHandler: function(){
       var cs = this.parentElement.children
@@ -3899,19 +3897,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </script>
 </polymer-element>
 
-<polymer-element name="yatta-element" hidden="" attributes="val connector" assetpath="../Yatta/">
+<polymer-element name="y-object" hidden="" attributes="val connector y" assetpath="../yjs/">
 </polymer-element>
-<polymer-element name="yatta-property" hidden="" attributes="val name" assetpath="../Yatta/">
+<polymer-element name="y-property" hidden="" attributes="val name y" assetpath="../yjs/">
 </polymer-element>
 
-<script src="../Yatta/build/browser/yatta-element.js"></script>
+<script src="../yjs/build/browser/y-object.js"></script>
 
-<polymer-element name="xmpp-connector" hidden="" attributes="conn_id connector room debug" assetpath="../Yatta-Connectors/xmpp-connector/">
+<polymer-element name="y-xmpp" hidden="" attributes="conn_id connector room debug" assetpath="../y-connectors/y-xmpp/">
   <template>
   </template>
-  <script src="../Yatta-Connectors/xmpp-connector/xmpp-connector-polymer.js"></script>
-</polymer-element>
-</div><polymer-element name="meme-together" assetpath="">
+  <script src="../y-connectors/y-xmpp/y-xmpp-polymer.js"></script>
+</polymer-element></div><polymer-element name="meme-together" assetpath="">
   <template>
     <style>
       :host {
@@ -3969,9 +3966,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </template>
           </div>
         </paper-dialog>
-        <xmpp-connector debug="true" connector="{{connector}}" room="meme-together"></xmpp-connector>
-        <yatta-element val="{{yatta}}" connector="{{connector}}">
-        </yatta-element>
+        <y-xmpp debug="true" connector="{{connector}}" room="meme-together-yjs"></y-xmpp>
+        <y-object val="{{y}}" connector="{{connector}}">
+        </y-object>
         <div id="meme_containers">
         </div>
     </div>
@@ -3982,20 +3979,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       window.meme_together = this;
       var that = this;
       var bind = (function(){
-        var y = that.yatta;
+        var y = that.y;
         if(y.val("feed") != null) {
           that.feed = y.val("feed");
           var feed_list = that.feed.val();
           for(var i in feed_list){
             var m = document.createElement("meme-container");
-            m.yatta = feed_list[i];
+            m.y = feed_list[i];
             that.$.meme_containers.appendChild(m);
           }
           that.feed.observe(function(events){
             for(var i in events){
               if(events[i].type === "insert"){
                 var new_meme = document.createElement("meme-container");
-                new_meme.yatta = events[i].value;
+                new_meme.y = events[i].value;
                 new_meme.feed = events[i].object
                 var b = that.$.meme_containers.children[events[i].position];
                 if(b != null){
@@ -4009,10 +4006,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               }
             }
           });
-        that.yatta.unobserve(bind)
+        that.y.unobserve(bind)
         }
       });
-      that.yatta.observe(bind);
+      that.y.observe(bind);
     },
     addMeme: function(event, n, img){
       this.$.meme_list.toggle();

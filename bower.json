@@ -22,6 +22,8 @@
     "../"
   ],
   "dependencies": {
-    "paper-elements": "Polymer/paper-elements#~0.5.2"
+    "paper-elements": "Polymer/paper-elements#~0.5.2",
+    "yjs": "rwth-acis/yjs#~0.3.1",
+    "y-connectors": "rwth-acis/y-connectors#~0.3.0"
   }
 }
