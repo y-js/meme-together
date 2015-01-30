@@ -1,0 +1,28 @@
+{
+  "name": "meme-together",
+  "version": "0.3.0",
+  "description": "Collaborative Meme Creator",
+  "main": "server.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DadaMonad/meme-together.git"
+  },
+  "keywords": [
+    "yjs"
+  ],
+  "author": "Kevin Jahns <kevin.jahns@rwth-aachen.de>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DadaMonad/meme-together/issues"
+  },
+  "homepage": "https://github.com/DadaMonad/meme-together"
+}
