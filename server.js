@@ -4,8 +4,8 @@
  * in some 
  */
 
-var Y = require('../yjs/build/node/y');
-Y.XMPP = require('../y-connectors/build/node/index').XMPP;
+var Y = require('yjs');
+Y.XMPP = require('y-connectors').XMPP;
 
 var connector = new Y.XMPP({
   host: "yatta.ninja", // You _must_ specify the host, when using it with nodejs (this is our testing server)
