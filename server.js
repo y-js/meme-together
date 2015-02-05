@@ -4,14 +4,14 @@
  * in some 
  */
 
-var Y = require('yjs');
-Y.XMPP = require('y-connectors').XMPP;
+var Y = require('../yjs/build/node/y.js');
+Y.XMPP = require('../y-connectors/build/node/index.js').XMPP;
 
 var connector = new Y.XMPP({
   host: "yatta.ninja", // You _must_ specify the host, when using it with nodejs (this is our testing server)
   user: "dmonad@users.yatta.ninja",
   password: process.argv[2],
-}).join("meme-together");
+}).join("meme-together-dev2", {role: "master"});
 
 connector.debug = true
 

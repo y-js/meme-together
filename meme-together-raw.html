@@ -6,7 +6,7 @@
 <link rel="import" href="../paper-dialog/paper-dialog.html">
 <link rel="import" href="../core-ajax/core-ajax.html">
 <link rel="import" href="../yjs/y-object.html">
-<link rel="import" href="../y-connectors/y-xmpp/y-xmpp.html">
+<link rel="import" href="../y-xmpp/y-xmpp.html">
 
 <polymer-element name="meme-together">
   <template>
@@ -66,7 +66,7 @@
             </template>
           </div>
         </paper-dialog>
-        <y-xmpp debug=true connector="{{connector}}" room="meme-together"></y-xmpp>
+        <y-xmpp id="y_xmpp" debug=true connector="{{connector}}" syncMode="syncAll"></y-xmpp>
         <y-object val={{y}} connector={{connector}}>
         </y-object>
         <div id="meme_containers">
@@ -77,6 +77,9 @@
   Polymer("meme-together",{
     ready: function(){
       window.meme_together = this;
+      this.$.y_xmpp.room = window.location.host
+    },
+    yChanged: function(){
       var that = this;
       var bind = (function(){
         var y = that.y;
@@ -113,6 +116,9 @@
     },
     addMeme: function(event, n, img){
       this.$.meme_list.toggle();
+      if(this.y.val("feed") == null){
+        this.y.val("feed",[],"mutable")
+      }
       this.feed.insert(0,{},"mutable");
       var e = this.feed.val(0);
       e.val("img",img.src)
