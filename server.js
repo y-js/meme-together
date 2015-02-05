@@ -1,17 +1,21 @@
 /*
  * Using Yjs on nodejs is not very different
  * from using it in the browser. It is *just another client*!
- * in some 
+ *
+ * start this server with
+ * `` node server.js room-name ``
+ *
+ * It will join the specified room and act as a master client. Therefore, you can set the syncMethod to master-slave
  */
 
 var Y = require('../yjs/build/node/y.js');
-Y.XMPP = require('../y-connectors/build/node/index.js').XMPP;
+Y.XMPP = require('../y-xmpp/build/node/y-xmpp.js');
 
 var connector = new Y.XMPP({
   host: "yatta.ninja", // You _must_ specify the host, when using it with nodejs (this is our testing server)
-  user: "dmonad@users.yatta.ninja",
+  defaultRoomComponent: "@conference.yatta.ninja", // You _must_ specify this, if you want to use the room on _your_ server
   password: process.argv[2],
-}).join("meme-together-dev2", {role: "master"});
+}).join(process.argv[2], {role: "master"});
 
 connector.debug = true
 

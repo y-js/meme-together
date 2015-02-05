@@ -6,9 +6,9 @@
 <link rel="import" href="../paper-dialog/paper-dialog.html">
 <link rel="import" href="../core-ajax/core-ajax.html">
 <link rel="import" href="../yjs/y-object.html">
-<link rel="import" href="../y-xmpp/y-xmpp.html">
+<link rel="import" href="../y-xmpp/build/browser/y-xmpp.html">
 
-<polymer-element name="meme-together">
+<polymer-element name="meme-together" attributes="y connector syncMethod">
   <template>
     <style>
       :host {
@@ -66,7 +66,7 @@
             </template>
           </div>
         </paper-dialog>
-        <y-xmpp id="y_xmpp" debug=true connector="{{connector}}" syncMode="syncAll"></y-xmpp>
+        <y-xmpp id="y_xmpp" debug=true connector="{{connector}}" room="{{room}}" syncMethod="{{syncMethod}}"></y-xmpp>
         <y-object val={{y}} connector={{connector}}>
         </y-object>
         <div id="meme_containers">
@@ -77,7 +77,10 @@
   Polymer("meme-together",{
     ready: function(){
       window.meme_together = this;
-      this.$.y_xmpp.room = window.location.host
+      this.room = window.location.host
+      if(this.syncMethod == null){
+        this.syncMethod = "syncAll"
+      }
     },
     yChanged: function(){
       var that = this;
