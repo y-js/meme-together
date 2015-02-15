@@ -13,8 +13,7 @@ Y.XMPP = require('../y-xmpp/build/node/y-xmpp.js');
 
 var connector = new Y.XMPP({
   host: "yatta.ninja", // You _must_ specify the host, when using it with nodejs (this is our testing server)
-  defaultRoomComponent: "@conference.yatta.ninja", // You _must_ specify this, if you want to use the room on _your_ server
-  password: process.argv[2],
+  defaultRoomComponent: "@conference.yatta.ninja" // You _must_ specify this, if you want to use the room on _your_ server
 }).join(process.argv[2], {role: "master"});
 
 connector.debug = true
