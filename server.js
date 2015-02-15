@@ -8,8 +8,12 @@
  * It will join the specified room and act as a master client. Therefore, you can set the syncMethod to master-slave
  */
 
-var Y = require('../yjs/build/node/y.js');
-Y.XMPP = require('../y-xmpp/build/node/y-xmpp.js');
+if(process.argv[2] == null){
+ throw new Error("You must specify a room-name! E.g. node server.js my-room");
+}
+
+var Y = require('yjs');
+Y.XMPP = require('y-xmpp');
 
 var connector = new Y.XMPP({
   host: "yatta.ninja", // You _must_ specify the host, when using it with nodejs (this is our testing server)
