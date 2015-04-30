@@ -12,7 +12,7 @@
     "collaborative"
   ],
   "license": "MIT",
-  "homepage": "https://dadamonad.github.io/",
+  "homepage": "http://y-js.org/",
   "ignore": [
     "**/.*",
     "node_modules",
