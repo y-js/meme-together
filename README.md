@@ -1,9 +1,9 @@
 
-This is a showcase project for [Yjs](https://github.com/rwth-acis/yjs).
+This is a showcase project for [Yjs](https://github.com/y-js/yjs).
 
 Create memes collaboratively. Everyone is able to see the changes you make in Real-Time. Open this page in another tab and be amazed. You find the complete source code for this example on here. You can also include this in your project, if you want.
 
-Test it out now on [my homepage](https://dadamonad.github.io/meme-together/)
+Test it out now on [my homepage](http://y-js.org/meme-together/)
 
 # Howto include this
 ```

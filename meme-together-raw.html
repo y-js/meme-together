@@ -7,6 +7,8 @@
 <link rel="import" href="../core-ajax/core-ajax.html">
 <link rel="import" href="../yjs/y-object.html">
 <link rel="import" href="../y-xmpp/y-xmpp.html">
+<script src="../y-text/y-text.js"></script>
+<script src="../y-list/y-list.js"></script>
 
 <polymer-element name="meme-together" attributes="y connector syncMethod room">
   <template>
@@ -80,7 +82,7 @@
       window.meme_together = this;
       if(this.room === undefined){
         // by default, meme-together will join a room that is named after the host. E.g. "dadamonad.github.io"
-        this.room = window.location.host
+        this.room = "memetogether" // window.location.host
       }
       if(this.syncMethod == null){
         this.syncMethod = "syncAll"
@@ -128,14 +130,14 @@
     addMeme: function(event, n, img){
       this.$.meme_list.toggle();
       if(this.y.val("feed") == null){
-        this.y.val("feed",[],"mutable")
+        this.y.val("feed", new Y.List())
       }
-      this.feed.insert(0,{},"mutable");
+      this.feed.insert(0, new Y.Object());
       var e = this.feed.val(0);
       e.val("img",img.src)
-      e.val("title","...","mutable");
-      e.val("top","This is","mutable");
-      e.val("bottom","Just right","mutable")
+      e.val("title", new Y.Text("..."));
+      e.val("top",new Y.Text("This is"));
+      e.val("bottom",new Y.Text("Just right"))
     },
     getMemesHandler: function(){
       console.log("dtrn")
