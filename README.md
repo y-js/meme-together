@@ -22,7 +22,7 @@ If you start a master client for your instance, you are able to serve thousands 
 
 E.g.:
 ```
-<meme-together syncMothed="master-slave"></meme-together>
+<meme-together syncMethod="master-slave"></meme-together>
 ```
 
 By default, meme-together creates a room that has the value of `window.location.host`. Therefore every server has another instance. You can also set, or retrieve the current room: `$("meme-together")[0].room`.
